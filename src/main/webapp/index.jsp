@@ -9,5 +9,5 @@ memberDto.setEmail("jo27233@gmail.com");
 
 session.setAttribute("userInfo", memberDto);
 
-response.sendRedirect(request.getContextPath() + "/badmin/boardmenu.bit");
+response.sendRedirect(request.getContextPath() + "/badmin/main.bit");
 %>

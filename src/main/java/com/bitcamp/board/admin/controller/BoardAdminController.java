@@ -14,12 +14,12 @@ public class BoardAdminController {
   @Autowired
   private BoardAdminService boardAdminService;
   
-  @RequestMapping("boardmenu.bit")
+  @RequestMapping("main.bit")
   public String boardmenu(Map<String, Object> model) {
-    List<BoardListDto> list = boardAdminService.getBoardMenu();
+//    List<BoardListDto> list = boardAdminService.getBoardMenu();
+//    
+//    model.put("menu", list);
     
-    model.put("menu", list);
-    
-    return "admin/boardmenu";
+    return "member/login";
   }
 }
