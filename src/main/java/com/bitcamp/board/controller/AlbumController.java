@@ -62,10 +62,11 @@ public class AlbumController {
                       MultipartFile multipartFile) {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     if(memberDto != null) {
+    	/*
       albumDto.setId(memberDto.getId());
       albumDto.setName(memberDto.getName());
       albumDto.setEmail(memberDto.getEmail());
-      
+      */
       if(multipartFile != null && !multipartFile.isEmpty()) {
         String opicture = multipartFile.getOriginalFilename();
         String realPath = servletContext.getRealPath("/img/upload/album");
@@ -99,10 +100,10 @@ public class AlbumController {
       if(seq != 0) {
         model.addAttribute("wseq", seq);
       } else {
-        model.addAttribute("errorMsg", "서버 문제로 글작성이 실패 했습니다.!!!");
+        model.addAttribute("errorMsg", "�꽌踰� 臾몄젣濡� 湲��옉�꽦�씠 �떎�뙣 �뻽�뒿�땲�떎.!!!");
       }
     } else {
-      model.addAttribute("errorMsg", "회원전용 게시판입니다!!!");
+      model.addAttribute("errorMsg", "�쉶�썝�쟾�슜 寃뚯떆�뙋�엯�땲�떎!!!");
     }
     
     return "album/writeOk";

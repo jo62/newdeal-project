@@ -1,3 +1,5 @@
+C:\Users\USER\Documents\workspace-sts-3.9.4.RELEASE\boardframework\src\main\webapp\resources\board\js\board.js
+
 var control = "";
 
 var listpath;

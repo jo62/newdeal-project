@@ -50,18 +50,19 @@ public class ReboardController {
   public String write(ReboardDto reboardDto, @RequestParam Map<String, String> param, HttpSession session, Model model) {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     if(memberDto != null) {
+    	/*
       reboardDto.setId(memberDto.getId());
       reboardDto.setName(memberDto.getName());
       reboardDto.setEmail(memberDto.getEmail());
-      
+      */
       int seq = reboardService.writeArticle(reboardDto);
       if(seq != 0) {
         model.addAttribute("wseq", seq);
       } else {
-        model.addAttribute("errorMsg", "서버 문제로 글작성이 실패 했습니다.!!!");
+        model.addAttribute("errorMsg", "�꽌踰� 臾몄젣濡� 湲��옉�꽦�씠 �떎�뙣 �뻽�뒿�땲�떎.!!!");
       }
     } else {
-      model.addAttribute("errorMsg", "회원전용 게시판입니다!!!");
+      model.addAttribute("errorMsg", "�쉶�썝�쟾�슜 寃뚯떆�뙋�엯�땲�떎!!!");
     }
     
     return "reboard/writeOk";
@@ -95,18 +96,19 @@ public class ReboardController {
   public String reply(ReboardDto reboardDto, @RequestParam Map<String, String> param, HttpSession session, Model model) {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     if(memberDto != null) {
+    	/*
       reboardDto.setId(memberDto.getId());
       reboardDto.setName(memberDto.getName());
       reboardDto.setEmail(memberDto.getEmail());
-      
+      */
       int seq = reboardService.replyArticle(reboardDto);
       if(seq != 0) {
         model.addAttribute("wseq", seq);
       } else {
-        model.addAttribute("errorMsg", "서버 문제로 글작성이 실패 했습니다.!!!");
+        model.addAttribute("errorMsg", "�꽌踰� 臾몄젣濡� 湲��옉�꽦�씠 �떎�뙣 �뻽�뒿�땲�떎.!!!");
       }
     } else {
-      model.addAttribute("errorMsg", "회원전용 게시판입니다!!!");
+      model.addAttribute("errorMsg", "�쉶�썝�쟾�슜 寃뚯떆�뙋�엯�땲�떎!!!");
     }
     
     return "reboard/writeOk";

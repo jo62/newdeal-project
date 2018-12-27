@@ -13,7 +13,7 @@ import com.bitcamp.board.admin.service.BoardAdminService;
 public class BoardAdminController {
   @Autowired
   private BoardAdminService boardAdminService;
-  
+  /*
   @RequestMapping("boardmenu.bit")
   public String boardmenu(Map<String, Object> model) {
     List<BoardListDto> list = boardAdminService.getBoardMenu();
@@ -22,4 +22,12 @@ public class BoardAdminController {
     
     return "admin/boardmenu";
   }
+  */
+  @RequestMapping("boardmenu.bit")
+	public String boardmeno(Map<String, Object> model) {
+		List<BoardListDto> list = boardAdminService.getBoardMenu();
+		model.put("menu", list);
+		
+		return "main/main";
+	}
 }

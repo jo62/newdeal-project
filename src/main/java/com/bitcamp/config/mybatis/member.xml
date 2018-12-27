@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bitcamp.board.dao.MemberDao">
+<select id="idCheck">
+	select count(*) from member where mid=#{mid}
+</select>
+
+<select id="selectMemberAll" resultType="memberDto">
+	select mid, mpwd, mname, maddr, maddrdeta, maddrcode from member
+</select>
+</mapper>
