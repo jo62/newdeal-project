@@ -50,9 +50,8 @@ public class ReboardController {
   public String write(ReboardDto reboardDto, @RequestParam Map<String, String> param, HttpSession session, Model model) {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     if(memberDto != null) {
-      reboardDto.setId(memberDto.getId());
-      reboardDto.setName(memberDto.getName());
-      reboardDto.setEmail(memberDto.getEmail());
+      reboardDto.setId(memberDto.getMid());
+      reboardDto.setName(memberDto.getMname());
       
       int seq = reboardService.writeArticle(reboardDto);
       if(seq != 0) {
@@ -95,9 +94,8 @@ public class ReboardController {
   public String reply(ReboardDto reboardDto, @RequestParam Map<String, String> param, HttpSession session, Model model) {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     if(memberDto != null) {
-      reboardDto.setId(memberDto.getId());
-      reboardDto.setName(memberDto.getName());
-      reboardDto.setEmail(memberDto.getEmail());
+      reboardDto.setId(memberDto.getMid());
+      reboardDto.setName(memberDto.getMname());
       
       int seq = reboardService.replyArticle(reboardDto);
       if(seq != 0) {

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -113,6 +115,21 @@
 		$("#footer").load("inc/footer.jsp");
 	})
 	
+	function idCheck() {
+		$.ajax({
+			url : "<%=request.getContextPath()%>/member/idCheck",
+			type : "post",
+			data : {"mid" : $('#btnId').val()},
+			success : function(data) {
+				if(data == true) {
+					alert('사용 가능한 아이디입니다.');
+				} else {
+					alert('이미 사용 중인 아이디입니다.');
+				}
+			}
+		});
+	}
+	
 	$('#btnSubmit').click(function() {
 		if ($('#mid').val() == "" || $('#mpwd').val() == "" || $('#mpwd2').val() == ""
 				|| $('#mname').val() == "") {
@@ -126,6 +143,7 @@
 		// 아이디 검사
 		
 	})
+	
 	
 	
 	</script> 

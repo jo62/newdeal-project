@@ -3,9 +3,8 @@
 
 <%
 MemberDto memberDto = new MemberDto();
-memberDto.setId("jo62");
-memberDto.setName("조영규");
-memberDto.setEmail("jo27233@gmail.com");
+memberDto.setMid("jo62");
+memberDto.setMname("조영규");
 
 session.setAttribute("userInfo", memberDto);
 
