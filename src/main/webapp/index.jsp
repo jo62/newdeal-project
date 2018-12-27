@@ -8,5 +8,5 @@ memberDto.setMname("조영규");
 
 session.setAttribute("userInfo", memberDto);
 
-response.sendRedirect(request.getContextPath() + "/badmin/boardmenu.bit");
+response.sendRedirect(request.getContextPath() + "/badmin/main.bit");
 %>

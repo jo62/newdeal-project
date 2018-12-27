@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,10 +20,12 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="idcheck")
+	
+	
+	@RequestMapping(value="idCheck", method = RequestMethod.POST)
 	public @ResponseBody boolean idcheck(String mid) {
 		int result = memberService.idCheck(mid);
-		return(result!=0)?true:false;
+		return(result==0)?true:false;
 	}
 	
 	@RequestMapping("join")
@@ -31,4 +34,11 @@ public class MemberController {
 		mav.setViewName("member/join");
 		return mav;
 	}
+	
+	@RequestMapping("jusoPopup")
+	public String jusoPopup(){
+		return "member/jusoPopup";
+	}
+	
+	
 }
