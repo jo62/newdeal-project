@@ -42,7 +42,7 @@
 								<label class="col-lg-2 control-label">아이디</label>
 
 								<div class="col-lg-10">
-									<input id="mid" type="text" class="form-control" placeholder="아이디">
+									<input id="mid" name="mid" type="text" class="form-control" placeholder="아이디">
 									<button type="button" class="btn btn-primary" id="btnId">아이디 확인</button>
 								</div>
 							</div>
@@ -50,14 +50,14 @@
 								<label class="col-lg-2 control-label">이름</label>
 
 								<div class="col-lg-10">
-									<input type="text" id="mname" class="form-control" placeholder="이름">
+									<input type="text" id="mname" name="mname" class="form-control" placeholder="이름">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">비밀번호</label>
 
 								<div class="col-lg-10">
-									<input type="password" id="mpwd" class="form-control" placeholder="비밀번호">
+									<input type="password" id="mpwd" name="mpwd" class="form-control" placeholder="비밀번호">
 								</div>
 							</div>
 							<div class="form-group">
@@ -72,14 +72,14 @@
 								<label class="col-lg-2 control-label">기본주소</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" placeholder="주소" id="roadAddrPart1">
+									<input type="text" class="form-control" placeholder="주소" id="maddr" name="maddr">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-lg-2 control-label">상세주소</label>
 
 								<div class="col-lg-10">
-									<input type="text" class="form-control" placeholder="상세 주소" id="addrDetail">
+									<input type="text" class="form-control" placeholder="상세 주소" id="maddrdeta" name="maddrdeta">
 								</div>
 							</div>
 							<div class="form-group">
@@ -87,7 +87,7 @@
 
 								<div class="col-lg-10">
 								<input type="hidden" id="confmKey" name="confmKey" value=""  >
-									<input type="text" class="form-control" placeholder="우편번호" id="zipNo">
+									<input type="text" class="form-control" placeholder="우편번호" id="maddrcode" name="maddrcode">
 									<input type="button" class="btn btn-primary" value="주소검색" onclick="goPopup();">
 								</div>
 							</div>
@@ -128,10 +128,9 @@ function goPopup(){
 function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
             , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
   // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-  document.form.roadAddrPart1.value = roadAddrPart1;
-  document.form.roadAddrPart2.value = roadAddrPart2;
-  document.form.addrDetail.value = addrDetail;
-  document.form.zipNo.value = zipNo;
+  document.form.maddr.value = roadAddrPart1;
+  document.form.maddrdeta.value = addrDetail;
+  document.form.maddrcode.value = zipNo;
 }
 </script>
 	
@@ -140,30 +139,26 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		$("#header").load("inc/header.jsp");
 		$("#footer").load("inc/footer.jsp");
 	})
-	
-	function idCheck() {
-			if ($('#mid').val()=="") {
-				alert("id를 입력해주세요!");
-			} else {
-				$.ajax({
-					url : "<%=request.getContextPath()%>/member/idCheck",
-					type : "post",
-					data : {"mid" : $('#mid').val()},
-					success : function(data) {
-						if(data == true) {
-							alert('사용 가능한 아이디입니다.');
-						} else {
-							alert('이미 사용 중인 아이디입니다.');
-							$('#mid').val("");
-							return;
-						}
-					}
-				});
-			}
-		}
 
 	$("#btnId").click(function() {
-		idCheck();
+		if ($('#mid').val()=="") {
+			alert("id를 입력해주세요!");
+		} else {
+			$.ajax({
+				url : "<%=request.getContextPath()%>/member/idCheck",
+				type : "post",
+				data : {"mid" : $('#mid').val()},
+				success : function(data) {
+					if(data == true) {
+						alert('사용 가능한 아이디입니다.');
+					} else {
+						alert('이미 사용 중인 아이디입니다.');
+						$('#mid').val("");
+						return;
+					}
+				}
+			});
+		}
 	});
 	
 	
@@ -179,10 +174,21 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			return;
 		}
 		
-		idCheck();
-		
-		$('#memberform').submit;
-		
+		$.ajax({
+			url : "<%=request.getContextPath()%>/member/idCheck",
+			type : "post",
+			data : {"mid" : $('#mid').val()},
+			success : function(data) {
+				console.log(data);
+				if(data == true) {
+					$('#memberform').submit();
+				} else {
+					alert('이미 사용 중인 아이디입니다.');
+					$('#mid').val("");
+					return;
+				}
+			}
+		});
 	})
 	
 	

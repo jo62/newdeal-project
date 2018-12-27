@@ -15,14 +15,14 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idCheck(String mid) {
 		int result = sqlSession.getMapper(MemberDao.class).idCheck(mid);
-		
 		return result;
 	}
 
 	@Override
-	public void insertMember(MemberDto memberDto) {
+	public int insertMember(MemberDto memberDto) {
 		// TODO Auto-generated method stub
-
+		int result = sqlSession.getMapper(MemberDao.class).insertMember(memberDto);
+		return result;
 	}
 
 	@Override
