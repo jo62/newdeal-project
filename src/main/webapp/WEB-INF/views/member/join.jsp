@@ -179,13 +179,11 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 			type : "post",
 			data : {"mid" : $('#mid').val()},
 			success : function(data) {
-				console.log(data);
 				if(data == true) {
 					$('#memberform').submit();
 				} else {
 					alert('이미 사용 중인 아이디입니다.');
 					$('#mid').val("");
-					return;
 				}
 			}
 		});

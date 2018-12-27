@@ -19,6 +19,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public MemberDto userCheck(MemberDto memberDto) {
+		MemberDto result = sqlSession.getMapper(MemberDao.class).userCheck(memberDto);
+		return result;
+	}
+	
+	@Override
 	public int insertMember(MemberDto memberDto) {
 		// TODO Auto-generated method stub
 		int result = sqlSession.getMapper(MemberDao.class).insertMember(memberDto);
