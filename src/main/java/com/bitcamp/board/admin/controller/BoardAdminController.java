@@ -20,15 +20,6 @@ public class BoardAdminController {
 //    
 //    model.put("menu", list);
     
-    return "member/Sample";
-  }
-  
-  @RequestMapping("jusoPopup.bit")
-  public String jusoPopup(Map<String, Object> model) {
-//    List<BoardListDto> list = boardAdminService.getBoardMenu();
-//    
-//    model.put("menu", list);
-    
-    return "member/jusoPopup";
+    return "member/login";
   }
 }
