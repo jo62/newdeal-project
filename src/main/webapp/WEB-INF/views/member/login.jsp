@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/common/public.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BitCamp</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootswatch.min.css" rel="stylesheet">
+    <link href="${root}/css/bootstrap.css" rel="stylesheet">
+    <link href="${root}/css/bootswatch.min.css" rel="stylesheet">
     <style type="text/css">
         body {
             padding-top: 100px;
@@ -78,13 +79,12 @@
 
     <!-- form -->
     <form class="form-signin" action="./list.html">
-        <input type="text" class="form-control" id="inputEmail" placeholder="아이디">
-        <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호">
-       
+        <input type="text" class="form-control" id="mid" name="mid" placeholder="아이디">
+        <input type="password" class="form-control" id="mpwd" name="mpwd" placeholder="비밀번호">
         <div class="row form-btn">
-            <button class="btn btn-large btn-warning" type="submit">로그인</button>
-            <a href="./join.html" class="btn btn-large btn-default">회원가입</a>
-        </div>
+            <button class="btn btn-large btn-warning" type="button" id="loginBtn">로그인</button>
+            <a href="<%=request.getContextPath()%>/member/join" class="btn btn-large btn-default">회원가입</a>
+</div>
     </form>
 
     <!-- footer -->
@@ -93,8 +93,33 @@
     </div>
 </div>
 
-<script src="js/jquery-2.1.0.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootswatch.js"></script>
+<script src="${root}/js/jquery-2.1.0.js"></script>
+<script src="${root}/js/bootstrap.min.js"></script>
+<script src="${root}/js/bootswatch.js"></script>
+<script type="text/javascript">
+$('#loginBtn').click(function() {
+	if($('#mid').val()=="" || $('#mpwd').val()=="") {
+		alert("필수 입력 사항이 입력되지 않았습니다.")
+	}
+	
+	$.ajax({
+		url : "<%=request.getContextPath()%>/member/userCheck",
+		type : "post",
+		data : {"mid" : $('#mid').val(),
+			"mpwd" : $('#mpwd').val()},
+		success : function(data) {
+			console.log(data);
+			if(data == true) {
+				$('.form-signin').submit();
+			} else {
+				alert('아이디가 없거나, 비밀번호가 일치하지 않습니다.');
+				$('#mid').val("");
+				$('#mpwd').val("")
+			}
+		}
+	});
+	
+})
+</script>
 </body>
 </html>

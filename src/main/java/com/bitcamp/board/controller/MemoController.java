@@ -23,8 +23,8 @@ public class MemoController {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     
     if(memberDto != null) {
-      memoDto.setId(memberDto.getId());
-      memoDto.setName(memberDto.getName());
+      memoDto.setId(memberDto.getMid());
+      memoDto.setName(memberDto.getMname());
       int cnt = memoService.writeMemo(memoDto);
     }
    
