@@ -40,7 +40,7 @@ $(document).ready(function() {
 	
 	$("#myBtn").click(function() {
 	  $("#pg").val("1");
-	  $("#key").val("mid");
+	  $("#key").val("id");
 	  $("#word").val("${userInfo.mid}");
 	  $("#commonForm").attr("method", "get").attr("action", listpath).submit();
 	});
