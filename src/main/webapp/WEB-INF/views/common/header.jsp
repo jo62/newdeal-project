@@ -37,22 +37,13 @@
                         <li><a href="../member/memberList">회원목록</a></li>
                     </ul>
                 </li>
-                <li>
-                	<a href="#" class="dropdown-toggle" data-toggle="dropdown">미디어관리</a>
-                	<ul class="dropdown-menu">
-                        <li><a href="#">미디어등록</a></li>
-                        <li><a href="#">미디어목록</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">대출관리</a></li>
-                <li><a href="#">공지사항</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${ContextPath}/member/logout">로그아웃 (userId)</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">설정 <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">개인정보</a></li>
+                        <li><a href="${root }/member/modify">개인정보</a></li>
                     </ul>
                 </li>
             </ul>

@@ -33,13 +33,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="modify")
-	public ModelAndView modifyMember(MemberDto memberDto) {
+	public ModelAndView modifyMember() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/modify");
 		return mav;
 	}
 
-	
 	@RequestMapping(value="userCheck")
 	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) {
 		boolean resultBoo;
