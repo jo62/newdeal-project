@@ -12,7 +12,7 @@ import com.bitcamp.board.model.MemoDto;
 import com.bitcamp.board.service.MemoService;
 import com.bitcamp.member.model.MemberDto;
 
-//@RestController(@Controller + @ResponseBody �빀移쒓쾬)
+//@RestController(@Controller + @ResponseBody 합친것)
 @Controller
 public class MemoController {
   @Autowired
@@ -23,10 +23,8 @@ public class MemoController {
     MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
     
     if(memberDto != null) {
-    	/*
-      memoDto.setId(memberDto.getId());
-      memoDto.setName(memberDto.getName());
-      */
+      memoDto.setId(memberDto.getMid());
+      memoDto.setName(memberDto.getMname());
       int cnt = memoService.writeMemo(memoDto);
     }
    

@@ -55,4 +55,5 @@ public class MemberDto {
 	public void setMaddrcode(String maddrcode) {
 		this.maddrcode = maddrcode;
 	}
+
 }

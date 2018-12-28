@@ -6,9 +6,10 @@ import com.bitcamp.member.model.MemberDto;
 
 public interface MemberDao {
 	int idCheck(String mid);
-	void insertMember(MemberDto memberDto);
+	MemberDto userCheck(MemberDto memberDto);
+	int insertMember(MemberDto memberDto);
 	MemberDto selectMember(String mid);
 	List<MemberDto> selectMemberAll();
-	void modifyMember(MemberDto memberDto);
+	int modifyMember(MemberDto memberDto);
 	void deleteMember(String mid);
 }
