@@ -40,8 +40,8 @@ $(document).ready(function() {
 	
 	$("#myBtn").click(function() {
 	  $("#pg").val("1");
-	  $("#key").val("id");
-	  $("#word").val("${userInfo.id}");
+	  $("#key").val("mid");
+	  $("#word").val("${userInfo.mid}");
 	  $("#commonForm").attr("method", "get").attr("action", listpath).submit();
 	});
 });
