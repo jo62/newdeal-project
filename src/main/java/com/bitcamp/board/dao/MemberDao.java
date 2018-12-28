@@ -7,6 +7,6 @@ public interface MemberDao {
 	MemberDto userCheck(MemberDto memberDto);
 	int insertMember(MemberDto memberDto);
 	MemberDto selectMember(String mid);
-	void modifyMember(MemberDto memberDto);
+	int modifyMember(MemberDto memberDto);
 	void deleteMember(String mid);
 }

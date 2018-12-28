@@ -15,4 +15,11 @@
 	insert into member values(#{mid}, #{mpwd}, #{mname}, #{maddr, jdbcType=VARCHAR},
 	#{maddrdeta, jdbcType=VARCHAR}, #{maddrcode, jdbcType=VARCHAR})
 </insert>
+<update id="modifyMember" parameterType="memberDto">
+	update member set mname = #{mname},
+	maddr = #{maddr, jdbcType=VARCHAR},
+	maddrdeta = #{maddrdeta, jdbcType=VARCHAR},
+	maddrcode = #{maddrcode, jdbcType=VARCHAR} 
+	where mid = #{mid}
+</update>
 </mapper>
