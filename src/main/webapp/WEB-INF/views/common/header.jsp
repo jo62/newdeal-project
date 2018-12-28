@@ -34,7 +34,8 @@
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리</a>
                 	<ul class="dropdown-menu">
                         <li><a href="../member/register">회원등록</a></li>
-                        <li><a href="../member/memberList">회원목록</a></li>
+                        <!-- <li><a href="../member/memberList">회원목록</a></li> -->
+                        <li><a href="#" onclick="memberList()">회원목록</a></li>
                     </ul>
                 </li>
                 <li>
@@ -60,4 +61,19 @@
     </div>
 </div>
 
+<script>
+	function memberList(){
+		$.ajax({
+			url : "../member/memberList",
+			type : "GET",
+			success : function(){
+				alert("success");
+				location.href = "../member/memberList"; 
+			},
+			error : function(){
+				alert("error");
+			}
+		});
+	}
+</script>
 

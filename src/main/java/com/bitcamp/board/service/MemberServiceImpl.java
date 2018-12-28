@@ -29,8 +29,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDto selectMember(String mid) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.getMapper(MemberDao.class).selectMember(mid);
 	}
 
 	@Override
@@ -41,8 +40,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void deleteMember(String mid) {
-		// TODO Auto-generated method stub
-
+		sqlSession.getMapper(MemberDao.class).deleteMember(mid);
 	}
 	
 	@Override

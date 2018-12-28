@@ -11,4 +11,12 @@
 <select id="selectMemberAll" resultType="memberDto">
 	select mid, mpwd, mname, maddr, maddrdeta, maddrcode from member
 </select>
+
+<select id="selectMember" parameterType="String" resultType="memberDto">
+	select mid, mpwd, mname, maddr, maddrdeta, maddrcode from member where mid = #{mid}
+</select>
+
+<delete id="deleteMember" parameterType="String">
+	delete from member where mid = #{mid}
+</delete>
 </mapper>

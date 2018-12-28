@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,14 +39,14 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping("memberList")
+	@RequestMapping(value="memberList")
 	public String memberList(Model model) {
 		
-		// ∏‚πˆ
+		// Î©§Î≤ÑÎ¶¨Ïä§Ìä∏
 		List<MemberDto> list = memberService.selectMemberAll();
 		model.addAttribute("list", list);
 		
-		// ∞‘Ω√∆«
+		// Í≤åÏãúÌåê
 		List<BoardListDto> blist = boardAdminService.getBoardMenu();
 		model.addAttribute("menu", blist);
 		
@@ -53,21 +56,35 @@ public class MemberController {
 	@RequestMapping("memberReg")
 	public String memberReg(Model model) {
 		
-		// ∞‘Ω√∆«
+		// ÔøΩ‘ΩÔøΩÔøΩÔøΩ
 		List<BoardListDto> blist = boardAdminService.getBoardMenu();
 		model.addAttribute("menu", blist);
 		
 		return "member/memberReg";
 	}
 	
-	@RequestMapping("memberView")
-	public String memberView(Model model) {
+	 */
+	@RequestMapping("memberView/{mid}")
+	public String memberView(Model model, @RequestBody @PathVariable("mid") String mid) {
 		
-		// ∞‘Ω√∆«
+		// Î©§Î≤Ñ
+		MemberDto member = memberService.selectMember(mid);
+		model.addAttribute("member", member);
+		
+		// Í≤åÏãúÌåê
 		List<BoardListDto> blist = boardAdminService.getBoardMenu();
 		model.addAttribute("menu", blist);
 		
 		return "member/memberView";
 	}
-	*/
+	
+	@RequestMapping(value="memberDelete/{mid}", method=RequestMethod.DELETE)
+	public @ResponseBody String memberDelete(@PathVariable(value="mid") String mid) {
+		
+		// Î©§Î≤Ñ ÏÇ≠Ï†ú
+		memberService.deleteMember(mid);
+		
+		return "../../member/memberList";
+	}
+
 }

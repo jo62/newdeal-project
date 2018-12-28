@@ -4,7 +4,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/boardNav.jsp"%>
 
-
 <div class="row">
         <div class="col-lg-12">
             <!-- ★★★ Tab Panel -->
@@ -49,7 +48,8 @@
                             <tr>
                                 <!-- <td class="text-center"></td> -->
                                 <td>${list.mid}</td>
-                                <td><a href="./memberView">${list.mname}</a></td>
+                                <%-- <td><a href="memberView/${list.mid}">${list.mname}</a></td> --%>
+                                <td><a href="#" onclick="memberView(${list.mid})">${list.mname}</a></td>
                                 <!-- 
                                 <td>010-0000-0000</td>
                                 <td>2004/02/18</td>
@@ -65,25 +65,19 @@
     </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
-<!-- 
 <script>
-	var mid = ${list.mid};
-	
-	var parameter = JSON.stringify({'mid' : mid});
-	
-	$.ajax({
-		url : 'memberView',
-		type : 'GET',
-		contentType : 'application/json;charset=UTF-8',
-		dataType : 'json',
-		data : parameter,
-		success : function(data){
-			alert("success");
-		},
-		error : function(){
-			alert("error");
-		}
-	});
-
+	function memberView(mid){
+		$.ajax({
+			url : "memberView/" + mid,
+			type : "GET",
+			data : {"mid" : mid},
+			success : function(){
+				alert("success");
+				location.href ="memberView/" + mid;
+			},
+			error : function(){
+				alert("error");
+			}
+		});
+	}
 </script>
- -->

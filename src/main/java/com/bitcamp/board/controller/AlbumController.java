@@ -8,8 +8,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.bitcamp.board.common.service.CommonService;
 import com.bitcamp.board.model.AlbumDto;
 import com.bitcamp.board.service.AlbumService;
@@ -100,10 +103,10 @@ public class AlbumController {
       if(seq != 0) {
         model.addAttribute("wseq", seq);
       } else {
-        model.addAttribute("errorMsg", "�꽌踰� 臾몄젣濡� 湲��옉�꽦�씠 �떎�뙣 �뻽�뒿�땲�떎.!!!");
+        model.addAttribute("errorMsg", "占쎄퐣甕곤옙 �눧紐꾩젫嚥∽옙 疫뀐옙占쎌삂占쎄쉐占쎌뵠 占쎈뼄占쎈솭 占쎈뻥占쎈뮸占쎈빍占쎈뼄.!!!");
       }
     } else {
-      model.addAttribute("errorMsg", "�쉶�썝�쟾�슜 寃뚯떆�뙋�엯�땲�떎!!!");
+      model.addAttribute("errorMsg", "占쎌돳占쎌뜚占쎌읈占쎌뒠 野껊슣�뻻占쎈솇占쎌뿯占쎈빍占쎈뼄!!!");
     }
     
     return "album/writeOk";

@@ -21,21 +21,19 @@
                     <tbody>
                     <tr>
                         <th class="text-center">ID</th>
-                        <td class="text-left">gglim</td>
+                        <td class="text-left">${member.mid}</td>
                         <th class="text-center">회원명</th>
-                        <td class="text-left">임경균</td>
+                        <td class="text-left">${member.mname}</td>
                     </tr>
                     <tr>
-                        <th class="text-center">생년월일</th>
-                        <td class="text-left">2014.02.19</td>
-                        <th class="text-center">성별</th>
-                        <td class="text-left">남</td>
-                    </tr>
-                    <tr>
-                        <th class="text-center">전화번호</th>
-                        <td class="text-left">010-0000-0000</td>
                         <th class="text-center">주소</th>
-                        <td class="text-left">서울시 금천구 가산동</td>
+                        <td class="text-left" colspan="3">${member.maddr}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">상세주소</th>
+                        <td class="text-left">${member.maddrdeta}</td>
+                        <th class="text-center">우편번호</th>
+                        <td class="text-left">${member.maddrcode}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -45,9 +43,27 @@
             <div class="pull-right">
             	  <!--button class="btn btn-success">수정</button-->
                 <a href="./modify.html" class="btn btn-success btn-default">수정</a>
-                <a href="#" class="btn btn-large btn-default">삭제</a>
-                <a href="./list.html" class="btn btn-large btn-default">목록</a>
+                <%-- <a href="../memberDelete/${member.mid}" class="btn btn-large btn-default">삭제</a> --%>
+                <a href="" onclick="memberDelete(${member.mid})" class="btn btn-large btn-default">삭제</a>
+                <a href="memberList" class="btn btn-large btn-default">목록</a>
             </div>
 
         </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+
+<script>
+	function memberDelete(mid){
+		$.ajax({
+			url : '../memberDelete/' + mid,
+			type : 'DELETE',
+			success : function(){
+				alert("success");
+				location.href ="../memberList";
+			},
+			error : function(){
+				alert("error");
+			}
+		})
+		
+}
+</script>
