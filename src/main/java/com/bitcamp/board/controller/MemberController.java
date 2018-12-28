@@ -1,4 +1,5 @@
 package com.bitcamp.board.controller;
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class MemberController {
 		return mav;
 	}
 
-	
+
 	@RequestMapping(value="userCheck")
 	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) {
 		boolean resultBoo;
@@ -140,4 +141,5 @@ public class MemberController {
 		
 		return "../../member/memberList";
 	}
+
 }

@@ -34,6 +34,21 @@
                         <td class="text-left">${member.maddrdeta}</td>
                         <th class="text-center">우편번호</th>
                         <td class="text-left">${member.maddrcode}</td>
+                        <td class="text-left">gglim</td>
+                        <th class="text-center">회원명</th>
+                        <td class="text-left">임경균</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">생년월일</th>
+                        <td class="text-left">2014.02.19</td>
+                        <th class="text-center">성별</th>
+                        <td class="text-left">남</td>
+                    </tr>
+                    <tr>
+                        <th class="text-center">전화번호</th>
+                        <td class="text-left">010-0000-0000</td>
+                        <th class="text-center">주소</th>
+                        <td class="text-left">서울시 금천구 가산동</td>
                     </tr>
                     </tbody>
                 </table>
@@ -67,3 +82,4 @@
 		
 }
 </script>
+

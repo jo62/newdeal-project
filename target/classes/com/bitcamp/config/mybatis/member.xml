@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.bitcamp.board.dao.MemberDao">
+<select id="idCheck" resultType="int">
+	select count(*) from member where mid=#{mid}
+</select>
+<select id="userCheck" parameterType="memberDto" resultType="memberDto">
+	select mid, mpwd, mname, maddr,
+	maddrdeta, maddrcode from member where mid=#{mid} and mpwd=#{mpwd}
+</select>
+<insert id="insertMember" parameterType="memberDto">
+	insert into member values(#{mid}, #{mpwd}, #{mname}, #{maddr, jdbcType=VARCHAR},
+	#{maddrdeta, jdbcType=VARCHAR}, #{maddrcode, jdbcType=VARCHAR})
+</insert>
+<update id="modifyMember" parameterType="memberDto">
+	update member set mname = #{mname},
+	maddr = #{maddr, jdbcType=VARCHAR},
+	maddrdeta = #{maddrdeta, jdbcType=VARCHAR},
+	maddrcode = #{maddrcode, jdbcType=VARCHAR} 
+	where mid = #{mid}
+</update>
+<select id="selectMemberAll" resultType="memberDto">
+  select mid, mpwd, mname, maddr, maddrdeta, maddrcode from member
+</select>
+</mapper>
