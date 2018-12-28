@@ -1,13 +1,17 @@
 package com.bitcamp.board.controller;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.bitcamp.board.admin.model.BoardListDto;
+import com.bitcamp.board.admin.service.BoardAdminService;
 import com.bitcamp.board.service.MemberService;
 import com.bitcamp.member.model.MemberDto;
 
@@ -16,6 +20,9 @@ import com.bitcamp.member.model.MemberDto;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+    private BoardAdminService boardAdminService;
 	
 	@RequestMapping(value="userCheck")
 	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) {
@@ -45,7 +52,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("join")
-	public ModelAndView login(){
+	public ModelAndView join(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/join");
 		return mav;
@@ -56,5 +63,27 @@ public class MemberController {
 		return "member/jusoPopup";
 	}
 	
+	@RequestMapping("login")
+	public String login(Map<String, Object> model, HttpSession session, 
+	                    @RequestParam("mid") String mid) {
+	  List<BoardListDto> list = boardAdminService.getBoardMenu();
+      model.put("menu", list);
+      session.setAttribute("sessionID", mid);
+	  
+	  return "main/main";
+	}
 	
+	@RequestMapping("memberList")
+    public String memberList(Model model) {
+        
+        // 멤버
+        List<MemberDto> list = memberService.selectMemberAll();
+        model.addAttribute("list", list);
+        
+        // 게시판
+        List<BoardListDto> blist = boardAdminService.getBoardMenu();
+        model.addAttribute("menu", blist);
+        
+        return "member/memberList";
+    }
 }

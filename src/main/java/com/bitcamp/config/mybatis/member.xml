@@ -15,4 +15,7 @@
 	insert into member values(#{mid}, #{mpwd}, #{mname}, #{maddr, jdbcType=VARCHAR},
 	#{maddrdeta, jdbcType=VARCHAR}, #{maddrcode, jdbcType=VARCHAR})
 </insert>
+<select id="selectMemberAll" resultType="memberDto">
+  select mid, mpwd, mname, maddr, maddrdeta, maddrcode from member
+</select>
 </mapper>

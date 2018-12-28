@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/public.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BitCamp</title>
@@ -78,7 +78,7 @@
     </div>
 
     <!-- form -->
-    <form class="form-signin" action="./list.html">
+    <form class="form-signin" action="${root}/member/login" method="post">
         <input type="text" class="form-control" id="mid" name="mid" placeholder="아이디">
         <input type="password" class="form-control" id="mpwd" name="mpwd" placeholder="비밀번호">
         <div class="row form-btn">

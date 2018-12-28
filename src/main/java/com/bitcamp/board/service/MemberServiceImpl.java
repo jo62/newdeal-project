@@ -1,5 +1,6 @@
 package com.bitcamp.board.service;
 
+import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,10 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 
 	}
+	
+	@Override
+    public List<MemberDto> selectMemberAll(){
+        return sqlSession.getMapper(MemberDao.class).selectMemberAll();
+    }
 
 }
