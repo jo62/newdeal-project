@@ -1,4 +1,5 @@
 package com.bitcamp.board.controller;
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +44,7 @@ public class MemberController {
 		return mav;
 	}
 
-	
+
 	@RequestMapping(value="userCheck")
 	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) {
 		boolean resultBoo;
@@ -106,7 +107,18 @@ public class MemberController {
 		
 		return "member/memberList";
 	}
+	/*
+	@RequestMapping("memberReg")
+	public String memberReg(Model model) {
+		
+		// �Խ���
+		List<BoardListDto> blist = boardAdminService.getBoardMenu();
+		model.addAttribute("menu", blist);
+		
+		return "member/memberReg";
+	}
 	
+	 */
 	@RequestMapping("memberView/{mid}")
 	public String memberView(Model model, @RequestBody @PathVariable("mid") String mid) {
 		
@@ -129,5 +141,5 @@ public class MemberController {
 		
 		return "../../member/memberList";
 	}
-	
+
 }

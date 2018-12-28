@@ -18,6 +18,27 @@
     <style type="text/css">
 	#maddr {width: 90%; display: inline;}
     </style>
+    
+  <script language="javascript">
+//opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+//document.domain = "abc.go.kr";
+function goPopup(){
+  // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+    var pop = window.open("${root}/member/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+    
+  // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+
+/** API 서비스 제공항목 확대 (2017.02) **/
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+            , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+  // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+  $("#maddr").val(roadAddrPart1);
+  $("#maddrdeta").val(addrDetail);
+  $("#maddrcode").val(zipNo);
+}
+  </script>
 </head>
 <body>
 
@@ -41,15 +62,6 @@
                         <li><a href="#">회원목록</a></li>
                     </ul>
                 </li>
-                <li>
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">미디어관리</a>
-                  <ul class="dropdown-menu">
-                        <li><a href="#">미디어등록</a></li>
-                        <li><a href="#">미디어목록</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">대출관리</a></li>
-                <li><a href="#">공지사항</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${ContextPath}/member/logout">로그아웃 (userId)</a></li>
@@ -99,7 +111,8 @@
                         <th class="text-center">주소</th>
                         <td class="text-left" colspan="3">
                           <input type="text" class="form-control" placeholder="주소" id="maddr">
-                          <input type="button" class="btn btn-success btn-default" value="주소찾기">  
+                          <input type="button" class="btn btn-success btn-default" value="주소찾기"
+                          onclick="goPopup()">  
                         </td>
                         </tr>
                         <tr>
