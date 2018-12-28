@@ -7,7 +7,6 @@
 
 <div class="row">
         <div class="col-lg-12">
-            <!-- ★★★ Tab Panel -->
             <div id="communityList" class="tab-content">
                 <!-- ★★★ 가입 커뮤니티 -->
                 <div class="tab-pane fade active in" id="joined">
