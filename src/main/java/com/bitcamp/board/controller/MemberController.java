@@ -4,6 +4,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,21 @@ public class MemberController {
 	
 	@Autowired
     private BoardAdminService boardAdminService;
+	
+
+	@RequestMapping(value="modifyinfo", method = RequestMethod.PUT, headers={"Content-type=application/json"})
+	public @ResponseBody int modifyMemberInfo(@RequestBody MemberDto memberDto) {
+		System.out.println(memberDto.getMaddrcode());
+		return memberService.modifyMember(memberDto);
+	}
+	
+	@RequestMapping(value="modify")
+	public ModelAndView modifyMember(MemberDto memberDto) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/modify");
+		return mav;
+	}
+
 	
 	@RequestMapping(value="userCheck")
 	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) {

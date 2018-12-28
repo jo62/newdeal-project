@@ -8,7 +8,7 @@ public interface MemberService {
 	MemberDto userCheck(MemberDto memberDto);
 	int insertMember(MemberDto memberDto);
 	MemberDto selectMember(String mid);
+	int modifyMember(MemberDto memberDto);
 	List<MemberDto> selectMemberAll();
-	void modifyMember(MemberDto memberDto);
 	void deleteMember(String mid);
 }
