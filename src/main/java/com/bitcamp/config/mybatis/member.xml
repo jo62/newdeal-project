@@ -22,4 +22,7 @@
 	maddrcode = #{maddrcode, jdbcType=VARCHAR} 
 	where mid = #{mid}
 </update>
+<select id="selectMemberAll" resultType="memberDto">
+  select mid, mpwd, mname, maddr, maddrdeta, maddrcode from member
+</select>
 </mapper>

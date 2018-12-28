@@ -1,5 +1,6 @@
 package com.bitcamp.board.service;
 
+import java.util.List;
 import com.bitcamp.member.model.MemberDto;
 
 public interface MemberService {
@@ -8,5 +9,6 @@ public interface MemberService {
 	int insertMember(MemberDto memberDto);
 	MemberDto selectMember(String mid);
 	int modifyMember(MemberDto memberDto);
+	List<MemberDto> selectMemberAll();
 	void deleteMember(String mid);
 }

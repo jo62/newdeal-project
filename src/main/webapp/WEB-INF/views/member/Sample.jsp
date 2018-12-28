@@ -50,7 +50,11 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
           <th>상세주소</th>
           <td>
             <input type="text" id="addrDetail" style="width:40%" value="">
+<<<<<<< HEAD
+            <input type="hidden" id="roadAddrPart2"  style="width:40%" value="">
+=======
             <!-- <input type="text" id="roadAddrPart2"  style="width:40%" value=""> -->
+>>>>>>> euna
           </td>
         </tr>
       </tbody>
