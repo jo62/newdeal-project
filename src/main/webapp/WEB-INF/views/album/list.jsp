@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/public.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/boardNav.jsp"%>
+<%@ include file="/WEB-INF/views/admin/boardmenu.jsp"%>
 <script type="text/javascript">
 $(document).ready(function() {
   control = "${root}/album";
@@ -161,5 +164,6 @@ $(document).ready(function() {
 </table>
 </form>
 </body>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </html>
 
