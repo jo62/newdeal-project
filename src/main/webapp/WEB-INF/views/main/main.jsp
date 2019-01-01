@@ -4,6 +4,6 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/boardNav.jsp"%>
 <div>
-	<img src="https://cdn.crowdpic.net/list-thumb/thumb_l_2F3E82E94FB9FA5F5037967786140BE9.jpg" style="width : 1000px; height : 800px">
+	<img src="https://cdn.crowdpic.net/list-thumb/thumb_l_2F3E82E94FB9FA5F5037967786140BE9.jpg" style="width : 1001px; height : 800px">
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
