@@ -45,4 +45,18 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<mvc:interceptors>
+	<mvc:interceptor>
+	<mvc:mapping path="/member/**"/>
+<!-- 	<mvc:mapping path="/album/**"/> -->
+<!-- 	<mvc:mapping path="/reboard/**"/> -->
+	<mvc:exclude-mapping path="/badmin/main.bit"/>
+	<mvc:exclude-mapping path="/member/join"/>
+	<mvc:exclude-mapping path="/member/idCheck"/>
+	<mvc:exclude-mapping path="/member/jusoPopup"/>
+	<mvc:exclude-mapping path="/member/userCheck"/>
+	<beans:bean class="com.bitcamp.util.LoginCheckInterceptor"></beans:bean>
+	</mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans:beans>

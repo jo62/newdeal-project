@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -85,17 +84,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping("login")
-	public String login(Map<String, Object> model, HttpSession session, 
-	                    @RequestParam("mid") String mid) {
+	public String login(Map<String, Object> model) {
 	  List<BoardListDto> list = boardAdminService.getBoardMenu();
       model.put("menu", list);
-      session.setAttribute("sessionID", mid);
 	  
 	  return "main/main";
 	}
 	
 	@RequestMapping(value="memberList")
-	public String memberList(Model model) {
+	public String memberList(Model model, HttpSession session) {
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		
+		if(!memberDto.getMid().equals("admin")) {
+			return "main/main";
+		}
 		
 		// 멤버리스트
 		List<MemberDto> list = memberService.selectMemberAll();
@@ -111,7 +113,7 @@ public class MemberController {
 	@RequestMapping("memberReg")
 	public String memberReg(Model model) {
 		
-		// �Խ���
+		
 		List<BoardListDto> blist = boardAdminService.getBoardMenu();
 		model.addAttribute("menu", blist);
 		

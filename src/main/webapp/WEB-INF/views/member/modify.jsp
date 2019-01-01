@@ -1,7 +1,8 @@
 <%@page import="com.bitcamp.member.model.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ include file="/WEB-INF/views/common/public.jsp" %>
+<%@ include file="/WEB-INF/views/common/public.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,64 +19,8 @@
     <style type="text/css">
 	#maddr {width: 90%; display: inline;}
     </style>
-    
-  <script language="javascript">
-//opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
-//document.domain = "abc.go.kr";
-function goPopup(){
-  // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
-    var pop = window.open("${root}/member/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-    
-  // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
-    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
-}
-
-/** API 서비스 제공항목 확대 (2017.02) **/
-function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
-            , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
-  // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-  $("#maddr").val(roadAddrPart1);
-  $("#maddrdeta").val(addrDetail);
-  $("#maddrcode").val(zipNo);
-}
-  </script>
 </head>
 <body>
-
-<!-- Main Navigation ========================================================================================== -->
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">BitCamp</a>
-        </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리</a>
-                  <ul class="dropdown-menu">
-                        <li><a href="#">회원등록</a></li>
-                        <li><a href="#">회원목록</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="${ContextPath}/member/logout">로그아웃 (userId)</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">설정 <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">개인정보</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
 
 <!-- Container ======================================================================================= -->
 <div class="container">
@@ -206,5 +151,6 @@ $('#btnsubmit').click(function() {
 })
 
 </script>
+<script type="text/javascript" src="${root }/js/address.js"></script>
 </body>
 </html>
