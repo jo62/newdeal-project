@@ -2,4 +2,4 @@
 
 <%
 response.sendRedirect(request.getContextPath() + "/badmin/main.bit");
-%>
+%> 
