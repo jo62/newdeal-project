@@ -4,7 +4,6 @@ public class BoardDto {
   private int seq;
   private String name;
   private String id;
-  private String email;
   private String subject;
   private String content;
   private int hit;
@@ -28,12 +27,6 @@ public class BoardDto {
   }
   public void setId(String id) {
     this.id = id;
-  }
-  public String getEmail() {
-    return email;
-  }
-  public void setEmail(String email) {
-    this.email = email;
   }
   public String getSubject() {
     return subject;

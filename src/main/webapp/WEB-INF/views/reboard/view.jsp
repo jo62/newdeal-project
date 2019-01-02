@@ -132,7 +132,7 @@ $(document).ready(function() {
 			output += ' <td>' + mlist[i].mcontent + '</td>';
 			output += ' <td width="200">' + mlist[i].mtime + '</td>';
 			
-			if(mlist[i].id == '${userInfo.id}') {
+			if(mlist[i].id == '${userInfo.mid}') {
 				output += ' <td width="120" memo-mseq="' + mlist[i].mseq + '">';
 				output += '   <lable class="viewMemoModifyBtn">수정</lable> / ';
 				output += '   <lable class="memoDeleteBtn">삭제</lable>';
@@ -186,7 +186,7 @@ $(document).ready(function() {
 		<img src="${root}/img/board/btn_reply.gif" class="replyBtn" width="40" height="22"
 			border="0" align="absmiddle" alt="답글">
 			
-		<c:if test="${userInfo.id == article.id }">
+		<c:if test="${userInfo.mid == article.id }">
 		<img src="${root}/img/board/btn_modify.gif" class="modifyBtn" 
       border="0" align="absmiddle" alt="글수정"> 
     <img src="${root}/img/board/btn_delete.gif" class="deleteBtn"
