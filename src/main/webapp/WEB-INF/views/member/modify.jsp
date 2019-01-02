@@ -90,15 +90,15 @@ $(function() {
 	var addrcode = '<%=((MemberDto)session.getAttribute("userInfo")).getMaddrcode()%>';
 	var addr = '<%=((MemberDto)session.getAttribute("userInfo")).getMaddr()%>';
 
-	if (addr != null) {
+	if (addr != 'null') {
 		$('#maddr').val(addr);
 	}
 	
-	if (addrdeta != null) {
+	if (addrdeta != 'null') {
 		$('#maddrdeta').val(addrdeta);
 	}
 	
-	if (addrcode != null) {
+	if (addrcode != 'null') {
 		$('#maddrcode').val(addrcode);
 	}
 	

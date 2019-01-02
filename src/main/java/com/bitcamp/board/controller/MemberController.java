@@ -1,8 +1,15 @@
 package com.bitcamp.board.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +27,7 @@ import com.bitcamp.board.admin.model.BoardListDto;
 import com.bitcamp.board.admin.service.BoardAdminService;
 import com.bitcamp.board.service.MemberService;
 import com.bitcamp.member.model.MemberDto;
+import com.bitcamp.util.AES256Cipher;
 
 @Controller
 @RequestMapping("/member")
@@ -29,6 +37,8 @@ public class MemberController {
 	
 	@Autowired
     private BoardAdminService boardAdminService;
+	
+	AES256Cipher a256 = AES256Cipher.getInstance();
 	
 
 	@RequestMapping(value="modifyinfo", method = RequestMethod.PUT, headers={"Content-type=application/json"})
@@ -44,10 +54,11 @@ public class MemberController {
 		return mav;
 	}
 
-
 	@RequestMapping(value="userCheck")
-	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) {
+	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
 		boolean resultBoo;
+		String secu = a256.AES_Encode(memberDto.getMpwd());
+		memberDto.setMpwd(secu);
 		MemberDto returnMemberDto = memberService.userCheck(memberDto);
 		if (returnMemberDto != null) {
 			resultBoo=true;
@@ -59,7 +70,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="insertMember")
-	public ModelAndView insertMember(MemberDto memberDto) {
+	public ModelAndView insertMember(MemberDto memberDto) throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+		String secu = a256.AES_Encode(memberDto.getMpwd());
+		memberDto.setMpwd(secu);
 		int result = memberService.insertMember(memberDto);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/login");
@@ -107,7 +120,7 @@ public class MemberController {
 		
 		return "member/memberList";
 	}
-
+	
 	@RequestMapping("memberView/{mid}")
 	public String memberView(Model model, @RequestBody @PathVariable("mid") String mid) {
 		
@@ -123,34 +136,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="memberDelete/{mid}", method=RequestMethod.DELETE)
-	public @ResponseBody String memberDelete(@PathVariable(value="mid") String mid, HttpSession session) {
+	public @ResponseBody String memberDelete(@PathVariable(value="mid") String mid) {
 		
 		// 멤버 삭제
 		memberService.deleteMember(mid);
 		
-		if(session.getAttribute("sessionID").equals(mid)) {
-			session.removeAttribute("sessionID");
-			return "member/login";
-		}
-		return "member/memberList";
-	}
-	
-	@RequestMapping("logout")
-	public String logout(HttpSession session) {
-		
-		session.removeAttribute("sessionID");
-		
-		return "member/login";
-	}
-	
-	@RequestMapping("main")
-	public String main(Model model) {
-		
-		// 게시판
-		List<BoardListDto> blist = boardAdminService.getBoardMenu();
-		model.addAttribute("menu", blist);
-		
-		return "main/main";
+		return "../../member/memberList";
 	}
 
 }

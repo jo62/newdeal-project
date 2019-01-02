@@ -8,6 +8,7 @@
 	float : left;
 	margin-top : 50px;
 	margin-left : 20px;
+	
 }
 
 .menu_category {
@@ -15,13 +16,15 @@
 	cursor: pointer;
 	position: relative;
 	font-weight: bold;
-	background-color: darkgary;
-	color: lightgray;
+	background-color: #202d3b;
+	color: #ffffff;
+	
 }
 
 .menu_body {
 	display: none;
 	text-align: left;
+	border-color: #202d3b;
 }
 
 .menu_body a {

@@ -17,7 +17,7 @@
 	position: relative;
 	font-weight: bold;
 	background-color: darkgray;
-	color: lightgray;
+	color: darkgray;
 }
 
 .menu_body {
