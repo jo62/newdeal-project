@@ -38,6 +38,8 @@ public class MemberController {
 	@Autowired
     private BoardAdminService boardAdminService;
 	
+	AES256Cipher a256 = AES256Cipher.getInstance();
+	
 
 	@RequestMapping(value="modifyinfo", method = RequestMethod.PUT, headers={"Content-type=application/json"})
 	public @ResponseBody int modifyMemberInfo(@RequestBody MemberDto memberDto) {
@@ -55,7 +57,6 @@ public class MemberController {
 	@RequestMapping(value="userCheck")
 	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
 		boolean resultBoo;
-		AES256Cipher a256 = AES256Cipher.getInstance();
 		String secu = a256.AES_Encode(memberDto.getMpwd());
 		memberDto.setMpwd(secu);
 		MemberDto returnMemberDto = memberService.userCheck(memberDto);
@@ -70,7 +71,6 @@ public class MemberController {
 	
 	@RequestMapping(value="insertMember")
 	public ModelAndView insertMember(MemberDto memberDto) throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
-		AES256Cipher a256 = AES256Cipher.getInstance();
 		String secu = a256.AES_Encode(memberDto.getMpwd());
 		memberDto.setMpwd(secu);
 		int result = memberService.insertMember(memberDto);
