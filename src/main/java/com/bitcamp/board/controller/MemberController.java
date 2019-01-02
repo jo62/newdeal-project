@@ -1,8 +1,15 @@
 package com.bitcamp.board.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +27,7 @@ import com.bitcamp.board.admin.model.BoardListDto;
 import com.bitcamp.board.admin.service.BoardAdminService;
 import com.bitcamp.board.service.MemberService;
 import com.bitcamp.member.model.MemberDto;
+import com.bitcamp.util.AES256Cipher;
 
 @Controller
 @RequestMapping("/member")
@@ -44,10 +52,12 @@ public class MemberController {
 		return mav;
 	}
 
-
 	@RequestMapping(value="userCheck")
-	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) {
+	public @ResponseBody boolean userCheck(MemberDto memberDto, HttpSession session) throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
 		boolean resultBoo;
+		AES256Cipher a256 = AES256Cipher.getInstance();
+		String secu = a256.AES_Encode(memberDto.getMpwd());
+		memberDto.setMpwd(secu);
 		MemberDto returnMemberDto = memberService.userCheck(memberDto);
 		if (returnMemberDto != null) {
 			resultBoo=true;
@@ -59,7 +69,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="insertMember")
-	public ModelAndView insertMember(MemberDto memberDto) {
+	public ModelAndView insertMember(MemberDto memberDto) throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
+		AES256Cipher a256 = AES256Cipher.getInstance();
+		String secu = a256.AES_Encode(memberDto.getMpwd());
+		memberDto.setMpwd(secu);
 		int result = memberService.insertMember(memberDto);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("member/login");
@@ -107,18 +120,7 @@ public class MemberController {
 		
 		return "member/memberList";
 	}
-	/*
-	@RequestMapping("memberReg")
-	public String memberReg(Model model) {
-		
-		// �Խ���
-		List<BoardListDto> blist = boardAdminService.getBoardMenu();
-		model.addAttribute("menu", blist);
-		
-		return "member/memberReg";
-	}
 	
-	 */
 	@RequestMapping("memberView/{mid}")
 	public String memberView(Model model, @RequestBody @PathVariable("mid") String mid) {
 		
