@@ -9,10 +9,10 @@
             <div class="col-lg-12">
                 <ul class="list-unstyled">
                     <li class="pull-right"><a href="#top">위로 이동</a></li>                    
-	                  <li><a href="#">BitCamp 홈</a></li>                    
+	                  <li><a href="<%=request.getContextPath()%>/member/main">BitCamp 홈</a></li>                    
                     <li><a href="#">이용약관</a></li>
                     <li><a href="#">도움말</a></li>
-                    <li><a href="#">회원탈퇴</a></li>                  
+                    <li><a href="#" id="memberOut" sessionID="${sessionID}">회원탈퇴</a></li>                  
                 </ul>
                 <p>© BitCamp 2018.</p>
             </div>
@@ -20,9 +20,23 @@
     </footer>
 </div>
 
-
-<script src="${root}/js/jquery-2.1.0.js"></script>
-<script src="${root}/js/bootstrap.min.js"></script>
-<script src="${root}/js/bootswatch.js"></script>
+<script>
+	$('#memberOut').click(function(){
+		var mid = $('#memberOut').attr('sessionID');
+		
+		$.ajax({
+			url : '<%=request.getContextPath()%>/member/memberDelete/' + mid,
+			type : 'DELETE',
+			success : function(){
+				/* alert("success"); */
+				/* sessionStorage.removeItem("sessionID"); */
+				location.href ="<%=request.getContextPath()%>/badmin/main.bit";
+			},
+			error : function(){
+				alert("error");
+			}
+		})
+	});
+</script>
 </body>
 </html>

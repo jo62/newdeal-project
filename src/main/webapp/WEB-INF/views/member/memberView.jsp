@@ -42,10 +42,10 @@
             
             <div class="pull-right">
             	  <!--button class="btn btn-success">수정</button-->
-                <a href="./modify.html" class="btn btn-success btn-default">수정</a>
+                <!-- <a href="./modify.html" class="btn btn-success btn-default">수정</a> -->
                 <%-- <a href="../memberDelete/${member.mid}" class="btn btn-large btn-default">삭제</a> --%>
-                <a href="" onclick="memberDelete(${member.mid})" class="btn btn-large btn-default">삭제</a>
-                <a href="memberList" class="btn btn-large btn-default">목록</a>
+                <a href="" onclick="memberDelete('${member.mid}')" class="btn btn-large btn-default">삭제</a>
+                <a href="<%=request.getContextPath()%>/member/memberList" class="btn btn-large btn-default">목록</a>
             </div>
 
         </div>
@@ -54,11 +54,11 @@
 <script>
 	function memberDelete(mid){
 		$.ajax({
-			url : '../memberDelete/' + mid,
+			url : '<%=request.getContextPath()%>/member/memberDelete/' + mid,
 			type : 'DELETE',
 			success : function(){
-				alert("success");
-				location.href ="../memberList";
+				/* alert("success"); */
+				location.href ="<%=request.getContextPath()%>/member/memberList";
 			},
 			error : function(){
 				alert("error");

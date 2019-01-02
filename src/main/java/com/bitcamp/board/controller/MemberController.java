@@ -107,18 +107,7 @@ public class MemberController {
 		
 		return "member/memberList";
 	}
-	/*
-	@RequestMapping("memberReg")
-	public String memberReg(Model model) {
-		
-		// �Խ���
-		List<BoardListDto> blist = boardAdminService.getBoardMenu();
-		model.addAttribute("menu", blist);
-		
-		return "member/memberReg";
-	}
-	
-	 */
+
 	@RequestMapping("memberView/{mid}")
 	public String memberView(Model model, @RequestBody @PathVariable("mid") String mid) {
 		
@@ -134,12 +123,33 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="memberDelete/{mid}", method=RequestMethod.DELETE)
-	public @ResponseBody String memberDelete(@PathVariable(value="mid") String mid) {
+	public @ResponseBody String memberDelete(@PathVariable(value="mid") String mid, HttpSession session) {
 		
 		// 멤버 삭제
 		memberService.deleteMember(mid);
+		if(session.getAttribute("sessionID").equals(mid)) {
+			session.removeAttribute("sessionID");
+			return "member/login";
+		}
+		return "member/memberList";
+	}
+	
+	@RequestMapping(value="logout")
+	public String logout(HttpSession session) {
 		
-		return "../../member/memberList";
+		session.removeAttribute("sessionID");
+		
+		return "member/login";
+	}
+	
+	@RequestMapping("main")
+	public String main(Model model) {
+		
+		// 게시판
+		List<BoardListDto> blist = boardAdminService.getBoardMenu();
+		model.addAttribute("menu", blist);
+		
+		return "main/main";
 	}
 
 }
