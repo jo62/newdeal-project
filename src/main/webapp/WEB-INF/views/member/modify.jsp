@@ -39,49 +39,10 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
   $("#maddrcode").val(zipNo);
 }
   </script>
-</head>
-<body>
 
 <!-- Main Navigation ========================================================================================== -->
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">BitCamp</a>
-        </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">회원관리</a>
-                  <ul class="dropdown-menu">
-                        <li><a href="#">회원등록</a></li>
-                        <li><a href="#">회원목록</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="${ContextPath}/member/logout">로그아웃 (userId)</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">설정 <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">개인정보</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-
-<!-- Container ======================================================================================= -->
-<div class="container">
-  <div class="row">
-  
-<!-- ★★★ Contents -->
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/boardNav.jsp"%>
         <div class="col-lg-12">
             <div class="page-header2">
                 <h3>회원정보</h3>
@@ -131,15 +92,13 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
             <div class="pull-right">
                 <a href="#" class="btn btn-success btn-default" id="btnsubmit">저장</a>
-                <a href="./list.html" class="btn btn-large btn-default">목록</a>
+                <a href="<%=request.getContextPath()%>/member/main" class="btn btn-large btn-default">목록</a>
             </div>
 
         </div>
-      </div>
 
 <!-- Footer ========================================================================================== -->
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-</div>
+ <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script src="${root}/js/jquery-2.1.0.js"></script>
 <script src="${root}/js/bootstrap.min.js"></script>
 <script src="${root}/js/bootswatch.js"></script>
