@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -84,20 +85,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping("login")
-	public String login(Map<String, Object> model) {
+	public String login(Map<String, Object> model, HttpSession session, 
+	                    @RequestParam("mid") String mid) {
 	  List<BoardListDto> list = boardAdminService.getBoardMenu();
       model.put("menu", list);
+      session.setAttribute("sessionID", mid);
 	  
 	  return "main/main";
 	}
 	
 	@RequestMapping(value="memberList")
-	public String memberList(Model model, HttpSession session) {
-		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
-		
-		if(!memberDto.getMid().equals("admin")) {
-			return "main/main";
-		}
+	public String memberList(Model model) {
 		
 		// 멤버리스트
 		List<MemberDto> list = memberService.selectMemberAll();
@@ -109,18 +107,7 @@ public class MemberController {
 		
 		return "member/memberList";
 	}
-	/*
-	@RequestMapping("memberReg")
-	public String memberReg(Model model) {
-		
-		
-		List<BoardListDto> blist = boardAdminService.getBoardMenu();
-		model.addAttribute("menu", blist);
-		
-		return "member/memberReg";
-	}
-	
-	 */
+
 	@RequestMapping("memberView/{mid}")
 	public String memberView(Model model, @RequestBody @PathVariable("mid") String mid) {
 		
@@ -136,12 +123,34 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="memberDelete/{mid}", method=RequestMethod.DELETE)
-	public @ResponseBody String memberDelete(@PathVariable(value="mid") String mid) {
+	public @ResponseBody String memberDelete(@PathVariable(value="mid") String mid, HttpSession session) {
 		
 		// 멤버 삭제
 		memberService.deleteMember(mid);
 		
-		return "../../member/memberList";
+		if(session.getAttribute("sessionID").equals(mid)) {
+			session.removeAttribute("sessionID");
+			return "member/login";
+		}
+		return "member/memberList";
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		
+		session.removeAttribute("sessionID");
+		
+		return "member/login";
+	}
+	
+	@RequestMapping("main")
+	public String main(Model model) {
+		
+		// 게시판
+		List<BoardListDto> blist = boardAdminService.getBoardMenu();
+		model.addAttribute("menu", blist);
+		
+		return "main/main";
 	}
 
 }

@@ -30,7 +30,7 @@
 			success : function(){
 				/* alert("success"); */
 				/* sessionStorage.removeItem("sessionID"); */
-				location.href ="<%=request.getContextPath()%>/badmin/main.bit";
+				location.href ="<%=request.getContextPath()%>/member/login";
 			},
 			error : function(){
 				alert("error");
