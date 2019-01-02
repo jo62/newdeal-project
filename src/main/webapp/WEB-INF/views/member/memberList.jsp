@@ -4,6 +4,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/boardNav.jsp"%>
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
 <div class="row">
         <div class="col-lg-12">
             <!-- ★★★ Tab Panel -->
@@ -13,7 +16,7 @@
                     <div class="page-header">
                         <h2 id="container">회원목록</h2>
                     </div>
-                    
+                    <!-- 
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <form class="form-search">
@@ -26,9 +29,9 @@
                             </form>
                         </div>
                     </div>
-
+					 -->
  										<div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table id="dt" class="table table-striped table-bordered table-hover">
                             <thead>
                             <tr>
                             <!-- 
@@ -36,8 +39,8 @@
                                  -->
                                 <th class="text-center">ID</th>
                                 <th class="text-center">회원명</th>
+                                <th class="text-center">주소</th>
                                 <!-- 
-                                <th class="text-center">전화번호</th>
                                 <th class="text-center">가입일</th>
                                  -->
                             </tr>
@@ -45,18 +48,16 @@
                             <tbody>
                             <!--<tr><td colspan="5" class="text-center">가입한 회원이 없습니다.</td></tr>-->
                             <c:forEach var="list" items="${list}">
-                            <c:if test="${list.mid != 'admin'}">
                             <tr>
                                 <!-- <td class="text-center"></td> -->
                                 <td>${list.mid}</td>
                                 <%-- <td><a href="memberView/${list.mid}">${list.mname}</a></td> --%>
-                                <td><a href="#" onclick="memberView(${list.mid})">${list.mname}</a></td>
+                                <td><a href="#" onclick="memberView('${list.mid}')">${list.mname}</a></td>
+                                <td>${list.maddr}</td>
                                 <!-- 
-                                <td>010-0000-0000</td>
                                 <td>2004/02/18</td>
                                  -->
                             </tr>
-                            </c:if>
                             </c:forEach>
                             </tbody>
                         </table>
@@ -68,13 +69,18 @@
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
 <script>
+$(document).ready(function(){
+	$('#dt').DataTable({
+		
+	});
+});
 	function memberView(mid){
 		$.ajax({
 			url : "memberView/" + mid,
 			type : "GET",
 			data : {"mid" : mid},
 			success : function(){
-				alert("success");
+				/* alert("success"); */
 				location.href ="memberView/" + mid;
 			},
 			error : function(){

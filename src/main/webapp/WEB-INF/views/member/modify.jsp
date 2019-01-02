@@ -1,8 +1,7 @@
 <%@page import="com.bitcamp.member.model.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/public.jsp" %>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+    <%@ include file="/WEB-INF/views/common/public.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +18,31 @@
     <style type="text/css">
 	#maddr {width: 90%; display: inline;}
     </style>
-</head>
-<body>
+    
+  <script language="javascript">
+//opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+//document.domain = "abc.go.kr";
+function goPopup(){
+  // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+    var pop = window.open("${root}/member/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+    
+  // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
 
-<!-- Container ======================================================================================= -->
-<div class="container">
-  <div class="row">
-  
-<!-- ★★★ Contents -->
+/** API 서비스 제공항목 확대 (2017.02) **/
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
+            , detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
+  // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+  $("#maddr").val(roadAddrPart1);
+  $("#maddrdeta").val(addrDetail);
+  $("#maddrcode").val(zipNo);
+}
+  </script>
+
+<!-- Main Navigation ========================================================================================== -->
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/boardNav.jsp"%>
         <div class="col-lg-12">
             <div class="page-header2">
                 <h3>회원정보</h3>
@@ -76,28 +92,13 @@
 
             <div class="pull-right">
                 <a href="#" class="btn btn-success btn-default" id="btnsubmit">저장</a>
-                <a href="./list.html" class="btn btn-large btn-default">목록</a>
+                <a href="<%=request.getContextPath()%>/member/main" class="btn btn-large btn-default">목록</a>
             </div>
 
         </div>
-      </div>
 
 <!-- Footer ========================================================================================== -->
-     <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="list-unstyled">
-                    <li class="pull-right"><a href="#top">위로 이동</a></li>                    
-                    <li><a href="#">BitCamp 홈</a></li>                    
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">도움말</a></li>
-                    <li><a href="#">회원탈퇴</a></li>                  
-                </ul>
-                <p>© BitCamp 2018.</p>
-            </div>
-        </div>
-    </footer>
-</div>
+ <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script src="${root}/js/jquery-2.1.0.js"></script>
 <script src="${root}/js/bootstrap.min.js"></script>
 <script src="${root}/js/bootswatch.js"></script>
@@ -108,15 +109,15 @@ $(function() {
 	var addrcode = '<%=((MemberDto)session.getAttribute("userInfo")).getMaddrcode()%>';
 	var addr = '<%=((MemberDto)session.getAttribute("userInfo")).getMaddr()%>';
 
-	if (addr != null) {
+	if (addr != 'null') {
 		$('#maddr').val(addr);
 	}
 	
-	if (addrdeta != null) {
+	if (addrdeta != 'null') {
 		$('#maddrdeta').val(addrdeta);
 	}
 	
-	if (addrcode != null) {
+	if (addrcode != 'null') {
 		$('#maddrcode').val(addrcode);
 	}
 	
@@ -151,6 +152,5 @@ $('#btnsubmit').click(function() {
 })
 
 </script>
-<script type="text/javascript" src="${root }/js/address.js"></script>
 </body>
 </html>
