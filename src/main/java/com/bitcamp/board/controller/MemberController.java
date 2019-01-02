@@ -140,9 +140,10 @@ public class MemberController {
 		
 		// 멤버 삭제
 		memberService.deleteMember(mid);
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
 		
-		if(session.getAttribute("sessionID").equals(mid)) {
-			session.removeAttribute("sessionID");
+		if(memberDto.getMid().equals(mid)) {
+			session.removeAttribute("userInfo");
 			return "member/login";
 		}
 		return "member/memberList";
@@ -151,7 +152,7 @@ public class MemberController {
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		
-		session.removeAttribute("sessionID");
+		session.removeAttribute("userInfo"); 
 		
 		return "member/login";
 	}

@@ -55,6 +55,7 @@
    <mvc:exclude-mapping path="/member/idCheck"/>
    <mvc:exclude-mapping path="/member/jusoPopup"/>
    <mvc:exclude-mapping path="/member/userCheck"/>
+   <mvc:exclude-mapping path="/member/insertMember"/>
    <beans:bean class="com.bitcamp.util.LoginCheckInterceptor"></beans:bean>
    </mvc:interceptor>
    </mvc:interceptors>
