@@ -48,6 +48,7 @@
                             <tbody>
                             <!--<tr><td colspan="5" class="text-center">가입한 회원이 없습니다.</td></tr>-->
                             <c:forEach var="list" items="${list}">
+                            <c:if test="${list.mid != 'admin'}">
                             <tr>
                                 <!-- <td class="text-center"></td> -->
                                 <td>${list.mid}</td>
@@ -58,6 +59,7 @@
                                 <td>2004/02/18</td>
                                  -->
                             </tr>
+                            </c:if>
                             </c:forEach>
                             </tbody>
                         </table>
