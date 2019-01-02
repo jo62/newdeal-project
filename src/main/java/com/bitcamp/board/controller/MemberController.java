@@ -152,7 +152,7 @@ public class MemberController {
 	@RequestMapping("logout")
 	public String logout(HttpSession session) {
 		
-		session.removeAttribute("userInfo"); 
+		session.removeAttribute("userInfo");
 		
 		return "member/login";
 	}
