@@ -3,15 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/common/boardNav.jsp"%>
-<!-- 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
- -->
- 
+
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
- 
+
 <div class="row">
         <div class="col-lg-12">
             <!-- ★★★ Tab Panel -->
@@ -34,9 +29,9 @@
                             </form>
                         </div>
                     </div>
- 					-->
+					 -->
  										<div class="table-responsive">
-                        <table id="dt" class="table table-striped table-bordered table-hover" id="dt">
+                        <table id="dt" class="table table-striped table-bordered table-hover">
                             <thead>
                             <tr>
                             <!-- 
@@ -53,7 +48,6 @@
                             <tbody>
                             <!--<tr><td colspan="5" class="text-center">가입한 회원이 없습니다.</td></tr>-->
                             <c:forEach var="list" items="${list}">
-                            <c:if test="${list.mid != 'admin'}">
                             <tr>
                                 <!-- <td class="text-center"></td> -->
                                 <td>${list.mid}</td>
@@ -64,7 +58,6 @@
                                 <td>2004/02/18</td>
                                  -->
                             </tr>
-                            </c:if>
                             </c:forEach>
                             </tbody>
                         </table>
@@ -73,11 +66,12 @@
             </div>
         </div>
     </div>
-
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+
 <script>
 $(document).ready(function(){
 	$('#dt').DataTable({
+		
 	});
 });
 	function memberView(mid){
@@ -95,4 +89,3 @@ $(document).ready(function(){
 		});
 	}
 </script>
-

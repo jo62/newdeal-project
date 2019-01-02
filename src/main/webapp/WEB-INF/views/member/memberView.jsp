@@ -64,6 +64,5 @@
 				alert("error");
 			}
 		})
-		
-}
+	}
 </script>
